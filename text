@@ -1,0 +1,43 @@
+
+
+
+
+ลบ
+ALTER TABLE public.specialwork DROP COLUMN full_name;
+ALTER TABLE public.student DROP COLUMN request;
+ALTER TABLE public.student DROP COLUMN special_request;
+
+ALTER TABLE public.specialwork ADD "hour" varchar(255) NULL;
+
+เพิ่ม
+ALTER TABLE volunteeractivity
+ADD COLUMN prefix varchar(255),
+ADD COLUMN nickname varchar(255),
+ADD COLUMN graduate varchar(255),
+ADD COLUMN branch varchar(255);
+
+ALTER TABLE specialwork
+ADD COLUMN prefix varchar(255),
+ADD COLUMN nickname varchar(255),
+ADD COLUMN graduate varchar(255),
+ADD COLUMN branch varchar(255);
+s
+ALTER TABLE specialwork
+ADD COLUMN prefix varchar(255),
+ADD COLUMN actiity_date varchar(255),
+ADD COLUMN organization_phone varchar(255)
+
+
+
+เพิม
+ALTER TABLE student ADD COLUMN update_date timestamp NULL;
+
+ALTER TABLE volunteeractivity_img ADD COLUMN volunteerId varchar(255) ;
+
+
+
+
+
+
+
+

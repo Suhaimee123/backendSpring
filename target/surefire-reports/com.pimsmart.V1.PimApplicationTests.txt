@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.pimsmart.V1.PimApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.110 s -- in com.pimsmart.V1.PimApplicationTests

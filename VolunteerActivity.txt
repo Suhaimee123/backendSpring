@@ -1,0 +1,234 @@
+CREATE TABLE public.scholarship (
+    id SERIAL PRIMARY KEY,                     -- ไอดีหลักของทุนการศึกษา
+    academic_year VARCHAR(9) NOT NULL,         -- ปีการศึกษา เช่น '2024/2025'
+    status VARCHAR(50) NOT NULL,               -- สถานะ เช่น 'เปิด', 'ปิด', 'กำลังดำเนินการ'
+    start_date TIMESTAMP NOT NULL,             -- วันที่เริ่มเปิดรับสมัคร
+    end_date TIMESTAMP NOT NULL,               -- วันที่ปิดรับสมัคร
+    created_at TIMESTAMP DEFAULT NOW(),        -- วันที่สร้างรายการทุน
+    updated_at TIMESTAMP DEFAULT NOW()         -- วันที่อัปเดตข้อมูลล่าสุด
+);
+CREATE TABLE public.scholarship_img (
+	id serial4 NOT NULL,
+	student_id varchar(255) NULL,
+	first_name varchar(255) NULL,
+	image_name varchar(255) NULL,
+	image_data varchar(255) NULL,
+	create_date timestamp NULL,
+	image_type varchar(255) NULL,
+	register_id int8 NULL,
+	CONSTRAINT scholarship_img_pkey PRIMARY KEY (id)
+);
+
+
+
+CREATE TABLE public.application_history (
+	id serial4 NOT NULL,
+	student_id varchar(255) NOT NULL,
+	application_type varchar(255) NOT NULL,
+	status varchar(255) DEFAULT 'pending'::character varying NULL,
+	submission_date timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	processed_date timestamp NULL,
+	processed_by varchar(255) NULL,
+	remarks varchar(255) NULL,
+	appointment_date varchar(255) NULL,
+	end_month varchar(255) NULL,
+	start_month varchar(255) NULL,
+	CONSTRAINT application_history_pkey PRIMARY KEY (id)
+);
+CREATE TABLE public.students_img (
+	id serial4 NOT NULL,
+	student_id varchar(255) NULL,
+	first_name varchar(255) NULL,
+	image_name varchar(255) NULL,
+	image_data varchar(255) NULL,
+	create_date timestamp NULL,
+	image_type varchar(255) NULL,
+	register_id int4 NULL,
+	CONSTRAINT students_img_pkey PRIMARY KEY (id)
+);
+
+
+
+
+
+CREATE TABLE public.post_news (
+	id bigserial NOT NULL,
+	"content" text NOT NULL,
+	create_date timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	image_name varchar(255) NULL,
+	image_data varchar(255) NULL,
+	image_type varchar(255) NULL,
+	CONSTRAINT post_news_pkey PRIMARY KEY (id)
+);
+
+
+CREATE TABLE public.request (
+	id bigserial NOT NULL,
+	student_id varchar(255) NULL,
+	first_name varchar(255) NULL,
+	special_request varchar(255) NULL,
+	create_date timestamp NULL
+);
+
+CREATE TABLE public.users (
+	id serial4 NOT NULL,
+	email varchar(255) NOT NULL,
+	"password" varchar(255) NOT NULL,
+	"token" varchar(255) NULL,
+	create_date timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	updated_date timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	CONSTRAINT users_email_key UNIQUE (email),
+	CONSTRAINT users_pkey PRIMARY KEY (id)
+);
+
+
+
+
+
+
+
+CREATE TABLE specialwork_img (
+    id serial4 NOT NULL,
+    student_id varchar NULL,
+    first_name varchar NULL,
+    image_name varchar NULL,
+    image_data text NULL,
+    create_date timestamp NULL,
+    image_type varchar NULL,
+    CONSTRAINT specialwork_img_pkey PRIMARY KEY (id)
+);
+
+CREATE TABLE volunteeractivity_img (
+    id serial4 NOT NULL,
+    student_id varchar NULL,
+    first_name varchar NULL,
+    image_name varchar NULL,
+    image_data text NULL,
+    create_date timestamp NULL,
+    image_type varchar NULL,
+    CONSTRAINT volunteeractivity_img_pkey PRIMARY KEY (id)
+);
+
+
+
+CREATE TABLE Student (
+    id SERIAL PRIMARY KEY,  -- รหัสนักเรียน, auto-incrementing
+    student_id VARCHAR(20),  -- รหัสประจำตัวนักเรียน
+    prefix VARCHAR(10),  -- คำนำหน้า
+    first_name VARCHAR(100),  -- ชื่อ
+    thai_name VARCHAR(100),  -- ชื่อภาษาไทย
+    last_name VARCHAR(100),  -- นามสกุล
+    nickname VARCHAR(50),  -- ชื่อเล่น
+    date_of_birth DATE,  -- วันเกิด (รูปแบบวันที่ ISO 8601)
+    gender VARCHAR(10),  -- เพศ
+    national_id VARCHAR(20),  -- เลขบัตรประชาชน
+    email VARCHAR(100),  -- อีเมล
+    phone_number VARCHAR(20),  -- หมายเลขโทรศัพท์
+    faculty VARCHAR(100),  -- คณะ
+    field_of_study VARCHAR(100),  -- สาขาวิชา
+    currently_studying_year VARCHAR(10),  -- ปีที่กำลังศึกษา
+    student_type VARCHAR(50),  -- ประเภทนักศึกษา
+    block VARCHAR(10),  -- บล็อคที่เรียน
+    current_gpa NUMERIC(3, 2),  -- เกรดเฉลี่ยปัจจุบัน (ใช้ตัวเลขทศนิยม)
+    create_date TIMESTAMP,  -- วันที่สร้างข้อมูล (รูปแบบวันที่-เวลา ISO 8601)
+    place_of_study VARCHAR(100),  -- สถานที่ศึกษา
+    other_place VARCHAR(100),
+    current_address TEXT,  -- ที่อยู่ปัจจุบัน
+    student_resident VARCHAR(100),  -- ที่พักนักศึกษา
+    number_of_residents INTEGER,  -- จำนวนผู้อยู่อาศัย
+    current_province VARCHAR(100),  -- จังหวัดปัจจุบัน
+    current_district VARCHAR(100),  -- อำเภอปัจจุบัน
+    current_subdistrict VARCHAR(100),  -- ตำบลปัจจุบัน
+    current_postal_code VARCHAR(10),  -- รหัสไปรษณีย์ปัจจุบัน
+    address_according_to_house_registration TEXT,  -- ที่อยู่ตามทะเบียนบ้าน
+    province VARCHAR(100),  -- จังหวัด
+    district VARCHAR(100),  -- อำเภอ
+    subdistrict VARCHAR(100),  -- ตำบล
+    postal_code VARCHAR(10),
+    advisor_name_surname VARCHAR(100),  -- อาจารย์ที่ปรึกษา ชื่อ - นามสกุล
+    advisor_phone_number VARCHAR(20),  -- เบอร์โทรอาจารย์ที่ปรึกษา
+    know_the_pim_smart_fund_from VARCHAR(100),  -- รู้จักกองทุน PIM SMART จาก
+    additional_details TEXT,  -- Add this field
+    scholarship_received VARCHAR(100),  -- ทุนการศึกษาที่ได้รับ
+    other_scholarships TEXT,  -- ทุนการศึกษาอื่น ๆ
+    education_loan VARCHAR(100),  -- กยศ สินเชื่อเพื่อการศึกษา
+    graduated_from_school VARCHAR(100),  -- จบจากโรงเรียน
+    province_school VARCHAR(100),
+    line_id VARCHAR(100),
+    facebook VARCHAR(100),
+    father_name_surname VARCHAR(100),
+    mother_name_surname VARCHAR(100),
+    occupation_father VARCHAR(100),
+    occupation_mother VARCHAR(100),
+    estimate_father_monthly_income VARCHAR(100),
+    mother_approximate_monthly_income VARCHAR(100),
+    father_address TEXT,
+    father_address_details TEXT,
+    mother_address TEXT,
+    mother_address_details TEXT,
+    congenital_disease TEXT,  -- โรคประจำตัว
+    paternal_memory_disorder TEXT,  -- โรคจำตัวบิดา
+    maternal_memory_disorder TEXT,  -- โรคจำตัวมารดา
+    father_status TEXT,  -- สถานภาพบิดา
+    father_status_details TEXT,  -- รายละเอียดสถานภาพบิดา
+    maternal_status TEXT,  -- สถานภาพมารดา
+    maternal_status_details TEXT,  -- รายละเอียดสถานภาพมารดา
+    have_siblings VARCHAR(10), -- มีพี่น้อง ( รวมนักศึกษา )
+    woman VARCHAR(10),
+    address_value VARCHAR(100),  -- ระบุค่าที่อยู่รายเดือนรวมน้ำไฟ ( เช่าบ้าน/หอ )
+    round_trip_travel VARCHAR(100),  -- การเดินทางไปกลับ
+    household_expenses VARCHAR(100),  -- ค่าใช้จ่ายภายในบ้าน
+    family_debt VARCHAR(100),
+    contact_information TEXT,  -- ข้อมูลการติดต่อกลับ
+    emergency_contact VARCHAR(100),  -- ชื่อ - นามสกุล ผู้ที่สามารถติดต่อได้ในกรณีฉุกเฉิน
+    relationship VARCHAR(50),  -- ความสัมพันธ์
+    emergency_contact_phone_number VARCHAR(20),
+    beauty_enhancement VARCHAR(100),  -- เสริมความงาม
+    beauty_enhancement_details TEXT,  -- รายละเอียดเสริมความงาม
+    man VARCHAR(10), -- เป็นชาย
+    person_who VARCHAR(50), -- นักศึกษาเป็นลูกคนที่
+    parent_information TEXT, -- ข้อมูลพ่อแม่
+    talent TEXT, -- ความสามารถพิเศษของนักศึกษา
+    primary_education VARCHAR(100),
+    middle_school VARCHAR(100), -- มัธยมต้น
+    high_school VARCHAR(100), -- มัธยมปลาย
+    current VARCHAR(100), -- ปัจจุบัน
+    special_work TEXT,
+    hope TEXT, -- ความมุ่งหวังหลังจากจบการศึกษา
+    committee TEXT, -- อยากบอกอะไรกับคณะกรรมการฯ
+    family_history text
+
+   );
+
+
+CREATE TABLE volunteeractivity (
+  id serial NOT NULL PRIMARY KEY,
+  student_id varchar,
+  first_name varchar,
+  activity_name varchar,
+  organization_name varchar,
+  organization_phone varchar,
+  activity_description text,
+  activity_date varchar,
+  hours integer,
+  create_date timestamp
+);
+
+CREATE TABLE specialwork (
+  id serial NOT NULL PRIMARY KEY,
+  student_id varchar,
+  first_name varchar,
+  work_name varchar,
+  organization_name varchar,
+  work_type varchar,
+  work_description text,
+  compensation numeric,
+  work_dates text,
+  work_time text,
+  create_date timestamp
+);
+
+
+
+
+

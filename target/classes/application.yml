@@ -1,0 +1,41 @@
+spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 20MB
+
+  folder:
+    id: 1zJZWPewLXuKUiLI8oKSLGeWVV-3l0Sml
+  drive:
+    credentials-path: googledrive.json
+
+  application:
+    name: pim
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: pim_admin
+    password: admin_password
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: learning.fund.pim@gmail.com
+    password: ucqfysvfuuvtedrl
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+server:
+  servlet:
+    context-path: /api
